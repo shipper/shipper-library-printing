@@ -6,7 +6,7 @@ using Charles.Shipper.Printing.Core.Drawing.Interfaces;
 using Charles.Shipper.Printing.Core.Drawing;
 using Newtonsoft.Json;
 
-namespace Charles.Shipper.Printing.Core
+namespace Charles.Shipper.Printing.Core.Drawing
 {
 	public class DrawingParser
 	{

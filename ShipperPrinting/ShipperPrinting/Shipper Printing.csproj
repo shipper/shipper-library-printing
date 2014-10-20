@@ -65,6 +65,14 @@
     <Compile Include="Drawing\Elements\DrawingString.cs" />
     <Compile Include="Drawing\Elements\DrawingCode128Barcode.cs" />
     <Compile Include="Drawing\Elements\DrawingPDF417Barcode.cs" />
+    <Compile Include="Extensions\IDisposableIEnumerableExtensions.cs" />
+    <Compile Include="Extensions\BitmapIEnumerableExtensions.cs" />
+    <Compile Include="Drawing\Elements\Interfaces\IDynamicElement.cs" />
+    <Compile Include="Extensions\IDictionaryExtensions.cs" />
+    <Compile Include="Extensions\Models\Pair.cs" />
+    <Compile Include="Drawing\Elements\DynamicElement.cs" />
+    <Compile Include="Extensions\IEnumerableILabelExtensions.cs" />
+    <Compile Include="Extensions\ExceptionExtensions.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -77,6 +85,8 @@
     <Folder Include="Drawing\Elements\" />
     <Folder Include="Drawing\Enums\" />
     <Folder Include="Enums\" />
+    <Folder Include="Drawing\Elements\Interfaces\" />
+    <Folder Include="Extensions\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Libraries\GenCode128.dll" />

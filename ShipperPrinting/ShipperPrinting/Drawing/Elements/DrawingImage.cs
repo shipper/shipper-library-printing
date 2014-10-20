@@ -4,9 +4,12 @@ using Charles.Shipper.Printing.Core.Drawing.Interfaces;
 
 namespace Charles.Shipper.Printing.Core.Drawing.Elements
 {
-	public class DrawingImage : DrawingElement
+	public class DrawingImage : DrawingElement, IDynamicElement
 	{
+		public string Id { get; set; }
+
 		public string Content { get; set; }
+
 		public RotateFlipType? RotateFlipType { get; set; }
 
 		public override void Draw(IDrawingClient client){

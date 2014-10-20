@@ -6,6 +6,8 @@ using Charles.Shipper.Printing.Core.Drawing;
 using Charles.Shipper.Printing.Core.Drawing.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.IO;
+using System.Linq;
 
 namespace Charles.Shipper.Printing.Core
 {
@@ -22,6 +24,8 @@ namespace Charles.Shipper.Printing.Core
 				return _Document;
 			}
 		}
+
+		private Action<Graphics> DrawingAction = null;
 
 		public Task Task = null;
 		private IEnumerable<IDrawingCommand> Commands = null;
@@ -45,11 +49,16 @@ namespace Charles.Shipper.Printing.Core
 		public Label(DrawingDocument document)
 			: this(document.GetCommands())
 		{
-
+			Width = document.Width;
+			Height = document.Height;
 		}
 		
 		public Label(IEnumerable<IDrawingCommand> commands){
 			Commands = commands;
+		}
+
+		private Label(Action<Graphics> drawingAction){
+			DrawingAction = drawingAction;
 		}
 
 		private void MakeDocument(){
@@ -67,12 +76,28 @@ namespace Charles.Shipper.Printing.Core
 			MakeDocument ();
 			_Document.Print (printerName);
 		}
+		
+		public void PrintToFile(string path, string name){
+			MakeDocument ();
+			_Document.PrintToFile (path, name);
+		}
+
+		public void PrintToFile(string path){
+			MakeDocument ();
+			_Document.PrintToFile (path);
+		}
 
 		public virtual void Draw (Graphics graphics){
 			if (Task != null) {
 				Task.Wait ();
 			}
+			if (DrawingAction != null) {
+				DrawingAction (graphics);
+				return;
+			}
 			using (DrawingClient client = new DrawingClient(Commands)) {
+				client.Width = Width;
+				client.Height = Height;
 				client.Draw (graphics);
 			}
 		}
@@ -80,6 +105,26 @@ namespace Charles.Shipper.Printing.Core
 		public void Dispose(){
 
 		}
+
+		public static IEnumerable<Label> FromDocuments(DrawingDocument document, params IEnumerable<IDynamicElement>[] documents){
+			if (documents == null || !documents.Any ()) {
+				return new []{ 
+					new Label (document) 
+				};
+			}
+			return documents.Select (doc => {
+				Label label = new Label((graphics)=>{
+					document.Document = doc;
+					using(DrawingClient client = new DrawingClient(document.GetCommands())){
+						client.Draw(graphics);
+					}
+				});
+				label.Width = document.Width;
+				label.Height = document.Height;
+				return label;
+			});
+		}
+
 	}
 }
 

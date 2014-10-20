@@ -26,6 +26,7 @@ namespace Charles.Shipper.Printing.Core.Drawing
 			}
 		}
 
+		public bool Landscape { get; set; }
 		public int Width {get;set;}
 		public int Height {get;set;}
 		public Font DefaultFont { get; set; }
@@ -35,6 +36,16 @@ namespace Charles.Shipper.Printing.Core.Drawing
 
 		internal ICollection<IDrawingCommand> Commands = new Collection<IDrawingCommand>();
 		internal ICollection<IDisposable> DisposableObjects = new Collection<IDisposable>();
+
+		public void ClearCommands (){
+			Commands = new Collection<IDrawingCommand> ();
+		}
+
+		public void Clear (Color color){
+			AddCommand ((graphics) => {
+				graphics.Clear (color);
+			});
+		}
 
 		public void TranslateTransform(float dx, float dy){
 			AddCommand ((graphics) => {

@@ -6,11 +6,16 @@ namespace Charles.Shipper.Printing.Core.Drawing.Interfaces
 {
 	public interface IDrawingClient
 	{
+		bool Landscape { get; set; }
 		int Width {get;set;}
 		int Height {get;set;}
 		Font DefaultFont { get; set; }
 		Brush DefaultBrush { get; set; }
 		Pen DefaultPen { get; set; }
+
+		void ClearCommands ();
+
+		void Clear (Color color);
 
 		void TranslateTransform (float dx, float dy);
 		void RotateTransform (float angle);

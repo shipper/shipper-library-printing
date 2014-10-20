@@ -3,13 +3,13 @@ using System.Runtime.CompilerServices;
 
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
-[assembly: AssemblyTitle ("ShipperPrinting")]
+[assembly: AssemblyTitle ("Shipper Printing")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
-[assembly: AssemblyCompany ("")]
+[assembly: AssemblyCompany ("Shipper")]
 [assembly: AssemblyProduct ("")]
-[assembly: AssemblyCopyright ("fabian")]
-[assembly: AssemblyTrademark ("")]
+[assembly: AssemblyCopyright ("Fabian Cook")]
+[assembly: AssemblyTrademark ("Shipper")]
 [assembly: AssemblyCulture ("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,
