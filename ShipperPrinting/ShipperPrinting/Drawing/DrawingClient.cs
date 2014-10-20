@@ -6,11 +6,26 @@ using System.Collections.Generic;
 using GenCode128;
 using System.IO;
 using Charles.Shipper.Printing.Core.Drawing.Interfaces;
+using System.Linq;
 
 namespace Charles.Shipper.Printing.Core.Drawing
 {
 	public class DrawingClient : IDrawingClient, IDisposable
 	{
+
+		public DrawingClient()
+			: this(null)
+		{
+
+		}
+
+		public DrawingClient(IEnumerable<IDrawingCommand> commands)
+		{
+			if (commands != null) {
+				Commands = commands.ToList ();
+			}
+		}
+
 		public int Width {get;set;}
 		public int Height {get;set;}
 		public Font DefaultFont { get; set; }

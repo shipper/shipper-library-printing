@@ -75,6 +75,8 @@
     <Folder Include="Drawing\" />
     <Folder Include="Drawing\Interfaces\" />
     <Folder Include="Drawing\Elements\" />
+    <Folder Include="Drawing\Enums\" />
+    <Folder Include="Enums\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Libraries\GenCode128.dll" />

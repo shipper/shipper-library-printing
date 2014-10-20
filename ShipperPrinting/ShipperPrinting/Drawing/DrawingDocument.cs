@@ -15,12 +15,16 @@ namespace Charles.Shipper.Printing.Core.Drawing
 		public IEnumerable<DrawingImage> Images { get; set; }
 		public IEnumerable<DrawingRectangle> Rectangles { get; set; }
 		public IEnumerable<DrawingLine> Lines { get; set; }
+		public IEnumerable<DrawingCode128Barcode> Code128Barcodes { get; set; }
+		public IEnumerable<DrawingPDF417Barcode> PDF417Barcodes { get; set; }
 
 		public void Draw(IDrawingClient client){
 			Draw (client, Strings);
 			Draw (client, Images);
 			Draw (client, Rectangles);
 			Draw (client, Lines);
+			Draw (client, Code128Barcodes);
+			Draw (client, PDF417Barcodes);
 		}
 
 		public void Draw(Graphics graphics){
@@ -33,6 +37,13 @@ namespace Charles.Shipper.Printing.Core.Drawing
 		private void Draw(IDrawingClient client, IEnumerable<DrawingElement> elements){
 			foreach (DrawingElement element in elements) {
 				element.Draw (client);
+			}
+		}
+
+		public IEnumerable<IDrawingCommand> GetCommands(){
+			using (DrawingClient client = new DrawingClient()) {
+				Draw (client);
+				return client.Commands;
 			}
 		}
 	}
